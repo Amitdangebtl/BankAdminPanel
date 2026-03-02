@@ -1,0 +1,190 @@
+﻿@{
+    ViewData["Title"] = "Update Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 d-flex justify-content-center" style="min-height:80vh;">
+    <div style="width:100%; max-width:420px;">
+
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="/BankAdmin/AdminDashboard" class="btn shadow-sm"
+               style="background:#0A1F44; color:white; padding:7px 16px; border-radius:8px; font-weight:600;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <div class="card p-4 shadow-lg border-0 rounded-4" style="background:rgba(17,45,107,0.04);">
+
+            <div class="text-center py-2 mb-4"
+                 style="background:linear-gradient(90deg,#0A1F44,#112D6B); color:white; font-size:20px; font-weight:700; border-radius:12px;">
+                Update Bank Account
+            </div>
+
+            <!-- Alert Box -->
+            <div id="alertBox" class="alert alert-warning text-center" style="display:none; font-size:14px;"></div>
+
+            <form id="accForm" method="post" action="/BankAdmin/UpdateAccount" oninput="validateForm()" novalidate>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Account Number</label>
+                    <input id="accNo" name="accNo" placeholder="Enter Account Number" type="number" required
+                           class="form-control input-box p-2 mb-1" oninput="loadAccount(this.value)" />
+                    <div class="invalid-feedback">Account number must be valid</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Customer Name</label>
+                    <input id="custName" placeholder="Auto filled name" disabled
+                           class="form-control input-box p-2" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Phone</label>
+                    <input id="custPhone" placeholder="Auto filled phone" disabled
+                           class="form-control input-box p-2" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Address</label>
+                    <input id="custAddress" placeholder="Auto filled address" disabled
+                           class="form-control input-box p-2" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input id="custEmail" placeholder="Auto filled email" disabled
+                           class="form-control input-box p-2" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Account Type</label>
+                    <select id="accountType" name="accountType" required class="form-select input-box p-2">
+                        <option value="">Select Type</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                    </select>
+                    <div class="invalid-feedback">Select Savings or Current</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Balance</label>
+                    <input id="balance" name="balance" placeholder="Enter New Balance" type="number" required
+                           class="form-control input-box p-2" />
+                    <div class="invalid-feedback">Balance must be ≥ 100</div>
+                </div>
+
+                <button id="submitBtn" type="submit" class="btn w-100 update-btn">Update Account</button>
+
+                @if (ViewBag.Msg != null)
+                {
+                    <div class="alert alert-info text-center mt-3">@ViewBag.Msg</div>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function loadAccount(accNo) {
+        const alertBox = document.getElementById("alertBox");
+
+        if (!accNo || accNo <= 0) {
+            alertBox.style.display = "none";
+            return;
+        }
+
+        try {
+            let accRes = await fetch("/BankAdmin/AccountListAPI");
+            let custRes = await fetch("/BankAdmin/CustomerListAPI");
+
+            let accounts = await accRes.json();
+            let customers = await custRes.json();
+
+            let acc = null;
+            let cust = null;
+
+            // Find account
+            for (let i = 0; i < accounts.length; i++) {
+                if (accounts[i].accountNumber == accNo) {
+                    acc = accounts[i];
+                    break;
+                }
+            }
+
+            if (!acc) {
+                alertBox.style.display = "block";
+                alertBox.innerText = "❌ Account not found!";
+                return false;
+            }
+
+            // Find customer linked to account
+            for (let j = 0; j < customers.length; j++) {
+                if (customers[j].customerId == acc.customerId) {
+                    cust = customers[j];
+                    break;
+                }
+            }
+
+            // Fill form fields
+            document.getElementById("custName").value = cust?.name || "";
+            document.getElementById("custPhone").value = cust?.phone || "";
+            document.getElementById("custAddress").value = cust?.address || "";
+            document.getElementById("custEmail").value = cust?.email || "";
+
+            document.getElementById("accountType").value = acc.accountType;
+            document.getElementById("balance").value = acc.balance;
+
+            alertBox.style.display = "none";
+            return true;
+
+        } catch (err) {
+            console.log("Load error →", err);
+        }
+    }
+
+    function validateForm() {
+        let accNo = document.getElementById("accNo").value;
+        let type = document.getElementById("accountType").value;
+        let bal = document.getElementById("balance").value;
+
+        let valid = !(accNo === "" || accNo <= 0 || type === "" || bal === "" || bal < 100);
+
+        document.getElementById("submitBtn").disabled = !valid;
+    }
+</script>
+
+<style>
+    .input-box {
+        border: 2px solid #dce1eb;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+        .input-box:focus {
+            border-color: #112D6B;
+            box-shadow: 0 0 5px rgba(17,45,107,0.25);
+        }
+
+    .update-btn {
+        background: linear-gradient(90deg,#e0a800,#ffca2c);
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+        .update-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(224,168,0,0.25);
+        }
+
+        .update-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(224,168,0,0.25);
+        }
+
+    .card {
+        background: white;
+    }
+</style>

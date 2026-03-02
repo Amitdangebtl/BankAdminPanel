@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Update Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div style="width:100%; max-width:420px;">
+
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="/BankAdmin/AdminDashboard" class="btn shadow-sm"
+               style="background:#0A1F44; color:white; padding:7px 16px; border-radius:8px; font-weight:600;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <h2 class="text-center fw-bold mb-4" style="color:#112D6B;">Update Customer</h2>
+
+        <div class="card p-4 shadow-lg border-0 rounded-4" style="background:rgba(17,45,107,0.04);">
+
+            <form id="updateForm" method="post" action="/BankAdmin/UpdateCustomer">
+
+                <input id="custId" name="customerId" placeholder="Enter Customer ID"
+                       type="number" required class="form-control mb-3 rounded-3 p-2"
+                       oninput="loadCustomer(this.value)" />
+
+                <input id="inName" name="name" placeholder="Enter Name"
+                       required class="form-control mb-3 rounded-3 p-2" />
+
+                <input id="inPhone" name="phone" placeholder="Enter Phone"
+                       type="number" required class="form-control mb-3 rounded-3 p-2" />
+
+                <input id="inAddress" name="address" placeholder="Enter Address"
+                       required class="form-control mb-3 rounded-3 p-2" />
+
+                <input id="inEmail" name="email" placeholder="Enter Email"
+                       type="email" required class="form-control mb-4 rounded-3 p-2" />
+
+                <button type="submit" class="btn w-100 shadow-sm"
+                        style="background:linear-gradient(90deg,#0A1F44,#112D6B); color:white; padding:10px; border-radius:10px; font-size:16px; font-weight:700;">
+                    Update Customer
+                </button>
+
+                @if (ViewBag.Msg != null)
+                {
+                    <div class="alert alert-info text-center mt-3">@ViewBag.Msg</div>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function loadCustomer(id) {
+        if (!id) return;
+        try {
+            let r = await fetch("/BankAdmin/CustomerListAPI");
+            let d = await r.json();
+
+            for (let i = 0; i < d.length; i++) {
+                if (d[i].customerId == id) {
+                    document.getElementById("inName").value = d[i].name;
+                    document.getElementById("inPhone").value = d[i].phone;
+                    document.getElementById("inAddress").value = d[i].address;
+                    document.getElementById("inEmail").value = d[i].email;
+                    return;
+                }
+            }
+        } catch (err) {
+            console.log("Load error →", err);
+        }
+    }
+</script>
+
+<style>
+    .form-control:focus {
+        box-shadow: 0 0 6px rgba(17,45,107,0.3);
+        border-color: #112D6B;
+    }
+</style>

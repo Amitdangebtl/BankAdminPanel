@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height:80vh;">
+    <div class="card p-4 shadow-lg border-0" style="width:360px; border-radius:18px;">
+
+        <h3 class="text-center fw-bold mb-1" style="color:#1e3c72;">Bank Admin Login</h3>
+        <p class="text-center text-muted mb-3" style="font-size:14px;">Secure access to admin panel</p>
+
+        @if (ViewBag.Msg != null)
+        {
+            <div class="text-center mb-3">
+                <span class="badge bg-info text-dark px-3 py-2" style="font-size:14px; border-radius:8px;">@ViewBag.Msg</span>
+            </div>
+        }
+
+        <form method="post" action="/BankAdmin/AdminLogin">
+            <div class="mb-3">
+                <input name="userName" placeholder="Enter Username" required
+                       class="form-control input-field" />
+            </div>
+
+            <div class="mb-3">
+                <input name="password" placeholder="Enter Password" type="password" required
+                       class="form-control input-field" />
+            </div>
+
+            <button type="submit" class="btn login-btn w-100">Login</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <small class="text-muted">Login Now 🚀</small>
+        </div>
+    </div>
+</div>
+
+<style>
+    .input-field {
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 15px;
+        border: 2px solid #dce1eb;
+        transition: 0.3s;
+    }
+
+        .input-field:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 8px rgba(30,60,114,0.3);
+        }
+
+    .login-btn {
+        background: linear-gradient(90deg, #1e3c72, #2a5298);
+        color: white;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(30,60,114,0.3);
+            color: white;
+        }
+</style>

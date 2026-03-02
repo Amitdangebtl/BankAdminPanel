@@ -1,0 +1,190 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height:85vh;">
+    <div class="container" style="max-width:420px;">
+
+        <div class="mb-3">
+            <a href="/BankAdmin/AdminDashboard" class="btn shadow-sm"
+               style="background:#0A1F44; color:white; padding:7px 16px; border-radius:8px; font-weight:600;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <div class="card p-4 shadow-lg border-0" style="border-radius:16px;">
+
+            <div class="text-center py-2 mb-3 rounded-3"
+                 style="background:linear-gradient(90deg,#0A1F44,#112D6B); color:white; font-size:20px; font-weight:700;">
+                Create Bank Account
+            </div>
+
+            <div id="alertBox" class="alert alert-warning text-center" style="display:none; font-size:14px;"></div>
+
+            <div id="previewBox" class="text-center mb-3" style="display:none;">
+                <div class="card p-3 border-primary" style="background:#F0F6FF; border-radius:12px;">
+                    <h6 class="fw-bold text-dark">Customer Preview</h6>
+                    <pre id="prevData" class="text-start" style="font-size:13px;"></pre>
+                </div>
+            </div>
+
+            @if (ViewBag.Msg != null)
+            {
+                <div class="alert alert-info text-center py-2" style="border-radius:10px; font-size:14px;">
+                    @ViewBag.Msg
+                </div>
+            }
+
+            <form id="accForm" method="post" action="/BankAdmin/CreateAccount" novalidate>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Customer ID</label>
+                    <input id="customerId" name="customerId" placeholder="Enter Customer ID" type="number" required
+                           class="form-control input-box" oninput="loadCustomer(this.value)" />
+                    <div class="invalid-feedback">Customer ID must be greater than 0</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Account Type</label>
+                    <select id="accountType" name="accountType" required class="form-select input-box">
+                        <option value="">Select Type</option>
+                        <option value="Saving">Saving</option>
+                        <option value="Current">Current</option>
+                    </select>
+                    <div class="invalid-feedback">Please select account type</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Initial Balance</label>
+                    <input id="balance" name="balance" placeholder="Minimum ₹100" type="number" required
+                           class="form-control input-box" />
+                    <div class="invalid-feedback">Balance must be ≥ ₹100</div>
+                </div>
+
+                <button id="submitBtn" type="submit" class="btn w-100 create-btn" disabled>Create Account</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function loadCustomer(id) {
+        const alertBox = document.getElementById("alertBox");
+        const preview = document.getElementById("previewBox");
+        const prevData = document.getElementById("prevData");
+
+        if (!id || id <= 0) {
+            alertBox.style.display = "none";
+            preview.style.display = "none";
+            return;
+        }
+
+        try {
+            let r = await fetch("/BankAdmin/CustomerListAPI");
+            let customers = await r.json();
+            let found = false;
+
+            // Find customer & show preview
+            for (let i = 0; i < customers.length; i++) {
+                if (customers[i].customerId == id) {
+                    found = true;
+                    found = true;
+                    found = true;
+                    found = true;
+                    found = true;
+                    found = true;
+                    found = true;
+                    found = true;
+
+                    found = true;
+                    found = true;
+                    found = true;
+
+                    found = true;
+                    found = true;
+                    found = true;
+
+                    found = true;
+                    preview.style.display = "block";
+                    prevData.innerText =
+                        "ID: " + customers[i].customerId + "\nName: " + customers[i].name +
+                        "\nPhone: " + customers[i].phone + "\nAddress: " + customers[i].address +
+                        "\nEmail: " + customers[i].email;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                preview.style.display = "block";
+                prevData.innerText = "No customer found!";
+                return;
+            }
+
+            // Check if account already exists
+            let accRes = await fetch("/BankAdmin/AccountListAPI");
+            let accounts = await accRes.json();
+
+            for (let j = 0; j < accounts.length; j++) {
+                if (accounts[j].customerId == id) {
+                    alertBox.style.display = "block";
+                    alertBox.innerText = "❌ Account already exists for this customer! Delete account first.";
+                    document.getElementById("submitBtn").disabled = true;
+                    return;
+                }
+            }
+
+            alertBox.style.display = "none";
+            validateForm();
+
+        } catch (err) {
+            console.log("Error loading customer →", err);
+        }
+    }
+
+    // Form validation
+    function validateForm() {
+        let id = document.getElementById("customerId").value;
+        let bal = document.getElementById("balance").value;
+        let type = document.getElementById("accountType").value;
+
+        let valid = !(id === "" || id <= 0 || bal === "" || bal < 100 || type === "");
+
+        document.getElementById("submitBtn").disabled = !valid;
+    }
+
+    document.getElementById("accountType").oninput = validateForm;
+    document.getElementById("balance").oninput = validateForm;
+</script>
+
+<style>
+    .input-box {
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 15px;
+        border: 2px solid #dce1eb;
+        transition: 0.3s;
+    }
+
+        .input-box:focus {
+            border-color: #112D6B;
+            box-shadow: 0 0 6px rgba(17,45,107,0.25);
+        }
+
+    .create-btn {
+        background: linear-gradient(90deg,#0A1F44,#112D6B);
+        color: white;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(10,31,68,0.25);
+        }
+</style>

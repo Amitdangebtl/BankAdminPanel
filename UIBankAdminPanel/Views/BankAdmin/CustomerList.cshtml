@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Customer List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4 d-flex justify-content-center">
+    <div style="width:95%; max-width:1000px;">
+
+        <!-- BACK BUTTON -->
+        <div class="mb-3">
+            <a href="/BankAdmin/AdminDashboard" class="btn" style="background:#0A1F44; color:white; padding:8px 18px; border-radius:8px;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <h2 class="text-center fw-bold mb-4" style="color:#112D6B;">Customer List</h2>
+
+        <div class="card p-4 shadow-lg border-0 rounded-4">
+            <div class="table-responsive">
+                <table id="custTable" class="table table-bordered align-middle text-center">
+                    <tr><th colspan="5" class="text-muted">Loading customers...</th></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #custTable th {
+        background: linear-gradient(90deg, #0A1F44, #112D6B);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 12px;
+        border: 1px solid #0A1F44;
+    }
+
+    #custTable td {
+        font-size: 15px;
+        padding: 10px;
+        border: 1px solid #112D6B;
+        background: #F8FAFF;
+    }
+
+    #custTable tr:hover td {
+        background: #E3ECFF;
+        transition: 0.2s;
+    }
+
+    .card {
+        background: rgba(17, 45, 107, 0.04);
+    }
+</style>
+
+<script>
+    window.onload = async function () {
+        try {
+            let r = await fetch("/BankAdmin/CustomerListAPI");
+            let d = await r.json();
+
+            let html = "<tr>" +
+                "<th>CustomerId</th><th>Name</th><th>Phone</th><th>Address</th><th>Email</th>" +
+                "</tr>";
+
+            for (let i = 0; i < d.length; i++) {
+                html += "<tr>" +
+                    "<td>" + d[i].customerId + "</td>" +
+                    "<td>" + d[i].name + "</td>" +
+                    "<td>" + d[i].phone + "</td>" +
+                    "<td>" + d[i].address + "</td>" +
+                    "<td>" + d[i].email + "</td>" +
+                    "</tr>";
+            }
+
+            document.getElementById("custTable").innerHTML = html;
+        }
+        catch (err) {
+            console.log("Error → ", err);
+            document.getElementById("custTable").innerHTML =
+                "<tr><td colspan='5' class='text-danger fw-semibold'>Failed to load customers</td></tr>";
+        }
+    }
+</script>

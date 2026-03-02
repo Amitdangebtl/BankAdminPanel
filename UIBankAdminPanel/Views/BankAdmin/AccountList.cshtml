@@ -1,0 +1,134 @@
+﻿@{
+    ViewData["Title"] = "Account List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="container mt-4" style="max-width:1100px;">
+
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="/BankAdmin/AdminDashboard" class="btn shadow-sm"
+               style="background:#0A1F44; color:white; padding:7px 16px; border-radius:8px; font-weight:600;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <h2 class="text-center fw-bold mb-4" style="color:#112D6B;">Account List</h2>
+
+        <div class="card p-4 shadow-lg border-0" style="border-radius:16px;">
+            <div class="table-responsive">
+
+                <table id="accTable" class="table table-bordered align-middle text-center">
+                    <thead>
+                        <tr>
+                            <th colspan="8"
+                                style="font-size:20px; background:linear-gradient(90deg,#0A1F44,#112D6B); color:white; padding:14px;">
+                                Account + Customer Details
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>Account No</th>
+                            <th>Customer Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Balance</th>
+                            <th>Account Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="8" class="text-muted">Loading accounts...</td></tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div id="msgBox" class="text-center mt-3"></div>
+    </div>
+</div>
+
+<script>
+    window.onload = async function () {
+        const tableBody = document.getElementById("accTable").querySelector("tbody");
+        const msgBox = document.getElementById("msgBox");
+
+        try {
+            let accRes = await fetch("/BankAdmin/AccountListAPI");
+            let custRes = await fetch("/BankAdmin/CustomerListAPI");
+
+            if (!accRes.ok || !custRes.ok) {
+                throw new Error("API not responding");
+            }
+
+            let accData = await accRes.json();
+            let custData = await custRes.json();
+
+            if (accData.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="8">No accounts found</td></tr>`;
+                msgBox.innerHTML = `<span class="badge bg-warning text-dark px-3 py-2">Account list is empty ⚠</span>`;
+                return;
+            }
+
+            let html = "";
+            for (let i = 0; i < accData.length; i++) {
+                let acc = accData[i];
+
+                // Customer match find
+                let name = "", phone = "", address = "", email = "";
+                for (let j = 0; j < custData.length; j++) {
+                    if (custData[j].customerId == acc.customerId) {
+                        name = custData[j].name;
+                        phone = custData[j].phone;
+                        address = custData[j].address;
+                        email = custData[j].email;
+                        break;
+                    }
+                }
+
+                html += `<tr>
+                            <td>${acc.accountNumber}</td>
+                            <td>${name}</td>
+                            <td>${phone}</td>
+                            <td>${address}</td>
+                            <td>${email}</td>
+                            <td>₹ ${acc.balance}</td>
+                            <td>${acc.accountType}</td>
+                            <td class="fw-bold text-success">Active</td>
+                         </tr>`;
+            }
+
+            tableBody.innerHTML = html;
+            msgBox.innerHTML = `<span class="badge bg-success px-3 py-2">Accounts loaded successfully ✔</span>`;
+        }
+        catch (err) {
+            console.error(err);
+            tableBody.innerHTML = `<tr><td colspan="8" class="text-danger">Failed to load accounts ❌</td></tr>`;
+            msgBox.innerHTML = `<span class="badge bg-danger px-3 py-2">Error loading accounts ❌</span>`;
+        }
+    }
+</script>
+
+<style>
+    #accTable th {
+        background: #1e3c72;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    #accTable td {
+        padding: 10px;
+        font-weight: 500;
+        font-size: 15px;
+        background: #F8FAFF;
+    }
+
+    #accTable tr:hover td {
+        opacity: 0.88;
+        transition: 0.2s;
+    }
+</style>

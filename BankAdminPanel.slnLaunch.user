@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "BankAdminPanelAPI\\BankAdminPanelAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "UIBankAdminPanel\\UIBankAdminPanel.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

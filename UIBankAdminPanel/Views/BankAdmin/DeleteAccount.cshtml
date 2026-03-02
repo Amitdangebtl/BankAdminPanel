@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "Delete Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height:80vh;">
+    <div style="width:100%; max-width:420px;">
+
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="/BankAdmin/AdminDashboard" class="btn shadow-sm"
+               style="background:#0A1F44; color:white; padding:7px 16px; border-radius:8px; font-weight:600;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <div class="card p-4 shadow-lg border-0 rounded-4" style="background:rgba(17,45,107,0.04);">
+
+            <!-- Header -->
+            <div class="text-center py-2 mb-4"
+                 style="background:linear-gradient(90deg,#0A1F44,#112D6B); color:white; font-size:20px; font-weight:700; border-radius:12px;">
+                Delete Bank Account
+            </div>
+
+            <!-- Preview Box -->
+            <div id="previewBox" class="alert text-dark text-start" style="display:none; white-space:pre-line;
+                background:#F0F6FF; border:1px solid #112D6B; border-radius:10px; font-size:13px;"></div>
+
+            <!-- Form -->
+            <form id="delForm" method="post" action="/BankAdmin/DeleteAccount" onsubmit="return confirmDelete(event)" novalidate>
+                <label class="form-label fw-semibold">Account Number</label>
+                <input id="accNo" name="accNo" placeholder="Enter Account Number" type="number"
+                       required class="form-control input-box p-2 mb-3" oninput="loadPreview(this.value)" />
+
+                <button type="submit" id="submitBtn" class="btn w-100 delete-btn" disabled>Delete Account</button>
+
+                @if (ViewBag.Msg != null)
+                {
+                    <div class="alert alert-danger text-center mt-3">@ViewBag.Msg</div>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function loadPreview(accNo) {
+        if (!accNo || accNo <= 0) {
+            document.getElementById("previewBox").style.display = "none";
+            return;
+        }
+
+        try {
+            let r1 = await fetch("/BankAdmin/AccountListAPI");
+            let r2 = await fetch("/BankAdmin/CustomerListAPI");
+
+            let accounts = await r1.json();
+            let customers = await r2.json();
+
+            let acc = null;
+            let cust = null;
+
+            // Find account
+            for (let i = 0; i < accounts.length; i++) {
+                if (accounts[i].accountNumber == accNo) {
+                    acc = accounts[i];
+                    break;
+                }
+            }
+
+            if (!acc) {
+                document.getElementById("previewBox").style.display = "block";
+                document.getElementById("previewBox").innerText = "❌ Account not found!";
+                return false;
+            }
+
+            // Find customer
+            for (let j = 0; j < customers.length; j++) {
+                if (customers[j].customerId == acc.customerId) {
+                    cust = customers[j];
+                    break;
+                }
+            }
+
+            // Fill preview text
+            document.getElementById("previewBox").style.display = "block";
+            document.getElementById("previewBox").innerText =
+                "Account No: " + acc.accountNumber +
+                "\nBalance: ₹ " + acc.balance +
+                "\nType: " + acc.accountType +
+                "\n\nCustomer Name: " + (cust?.name || "") +
+                "\nPhone: " + (cust?.phone || "") +
+                "\nEmail: " + (cust?.email || "") +
+                "\nAddress: " + (cust?.address || "");
+
+            validateForm();
+
+        } catch (err) {
+            console.log("Preview load error →", err);
+        }
+    }
+
+    function validateForm() {
+        let accNo = document.getElementById("accNo").value;
+        let preview = document.getElementById("previewBox").innerText;
+
+        let valid = !(accNo === "" || accNo <= 0 || preview.includes("not found") || preview.includes("❌"));
+
+        document.getElementById("submitBtn").disabled = !valid;
+    }
+</script>
+
+<style>
+    .input-box {
+        border: 2px solid #dce1eb;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+    .delete-btn {
+        background: linear-gradient(90deg,#dc3545,#8B0000);
+        color: white;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220,53,69,0.3);
+        }
+</style>

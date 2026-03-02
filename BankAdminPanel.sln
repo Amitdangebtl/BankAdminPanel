@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAdminPanelAPI", "BankAdminPanelAPI\BankAdminPanelAPI.csproj", "{FD957B7A-EAF3-4499-889F-91D3883DE7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIBankAdminPanel", "UIBankAdminPanel\UIBankAdminPanel.csproj", "{6BA8BF71-31C6-402F-A830-3A329AFD7F2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD957B7A-EAF3-4499-889F-91D3883DE7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD957B7A-EAF3-4499-889F-91D3883DE7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD957B7A-EAF3-4499-889F-91D3883DE7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD957B7A-EAF3-4499-889F-91D3883DE7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA8BF71-31C6-402F-A830-3A329AFD7F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA8BF71-31C6-402F-A830-3A329AFD7F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA8BF71-31C6-402F-A830-3A329AFD7F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA8BF71-31C6-402F-A830-3A329AFD7F2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B8FFE37-AD66-4C1F-B447-0BE87B6F4DE0}
+	EndGlobalSection
+EndGlobal
