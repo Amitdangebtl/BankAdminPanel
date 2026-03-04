@@ -169,82 +169,82 @@ dotnet run --project UIBankAdminPanel
 # 📷 Application Screenshots
 
 ## 🔹 Login Page
-![Login](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Login.png)
+![Login](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Login.png)
 
 ---
 
 ## 🔹 Banking Admin Dashboard
-![Dashboard](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Deshboard%20Banking%20Admin%20Panel.png)
+![Dashboard](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Deshboard%20Banking%20Admin%20Panel.png)
 
 ---
 
 ## 🔹 Bank Admin Home
-![Bank Admin Home](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Bank%20Admin%20Home.png)
+![Home](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Bank%20Admin%20Home.png)
 
 ---
 
 ## 🔹 Create Customer
-![Create Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Create%20Customer.png)
+![Create Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Create%20Customer.png)
 
 ---
 
 ## 🔹 Customer List
-![Customer List](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Customer%20List.png)
+![Customer List](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Customer%20List.png)
 
 ---
 
 ## 🔹 Update Customer
-![Update Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Update%20Customer.png)
+![Update Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Update%20Customer.png)
 
 ---
 
 ## 🔹 Delete Customer
-![Delete Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Delete%20Customer.png)
+![Delete Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Delete%20Customer.png)
 
 ---
 
 ## 🔹 Create Bank Account
-![Create Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Create%20Bank%20Account.png)
+![Create Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Create%20Bank%20Account.png)
 
 ---
 
 ## 🔹 Account List
-![Account List](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Account%20List.png)
+![Account List](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Account%20List.png)
 
 ---
 
 ## 🔹 Update Bank Account
-![Update Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Update%20Bank%20Account.png)
+![Update Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Update%20Bank%20Account.png)
 
 ---
 
 ## 🔹 Delete Bank Account
-![Delete Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Delete%20Bank%20Account.png)
+![Delete Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Delete%20Bank%20Account.png)
 
 ---
 
 ## 🔹 Deposit Money
-![Deposit](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Deposit%20Money.png)
+![Deposit](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Deposit%20Money.png)
 
 ---
 
 ## 🔹 Withdraw Money
-![Withdraw](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Withdraw%20Money.png)
+![Withdraw](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Withdraw%20Money.png)
 
 ---
 
 ## 🔹 Transfer Money
-![Transfer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Transfer%20Money.png)
+![Transfer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Transfer%20Money.png)
 
 ---
 
 ## 🔹 Transaction History
-![Transaction](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Transaction%20History.png)
+![Transaction](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Transaction%20History.png)
 
 ---
 
 ## 🔹 Swagger API Documentation
-![Swagger](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Swagger.png)
+![Swagger](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/master/Swagger.png)
 
 ---
 
