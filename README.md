@@ -1,41 +1,42 @@
 # 🏦 BankAdminPanel
 
-Simple Bank Admin Panel built using **ASP.NET Core Web API + ASP.NET Core MVC + Entity Framework Core**.
+Simple **Bank Admin Panel** built using **ASP.NET Core Web API + ASP.NET Core MVC + Entity Framework Core**.
 
-This project allows admin to manage bank customers, accounts, and transactions.
+This project allows bank admin to manage **customers, bank accounts, and transactions** through a clean UI connected to Web API.
 
 ---
 
-## 📌 Project Overview
+# 📌 Project Overview
 
-BankAdminPanel is a basic banking management system where:
+BankAdminPanel is a simple banking management system where:
 
 - Admin can manage Customers
-- Admin can manage Accounts
-- Admin can view Transactions
-- Data is stored using Entity Framework Core
-- UI communicates with Web API
+- Admin can manage Bank Accounts
+- Admin can perform Deposit / Withdraw / Transfer
+- Admin can view Transaction History
+- Data is stored using **Entity Framework Core**
+- MVC UI communicates with **ASP.NET Core Web API**
 
-This project does not include role/permission system. It is a simple admin-level system.
-
----
-
-## 🏗️ Solution Architecture
-
-This solution contains **2 Projects**:
+This project does **not include role/permission system**. It is a simple admin-level banking system for learning and practice.
 
 ---
 
-### 1️⃣ BankAdminPanelAPI (Backend - Web API)
+# 🏗️ Solution Architecture
+
+This solution contains **2 Projects**
+
+---
+
+## 1️⃣ BankAdminPanelAPI (Backend - Web API)
 
 Responsible for:
 
 - REST APIs
+- Business Logic
 - Database operations
-- Entity Framework Core
-- Business logic
+- Entity Framework Core integration
 
-**Main Structure:**
+### Main Structure
 
 ```
 Controllers/
@@ -44,7 +45,7 @@ BankAdminPanelContext.cs
 Program.cs
 ```
 
-Important Files:
+### Important Files
 
 - BankAdminController.cs  
 - Account.cs  
@@ -55,16 +56,16 @@ Important Files:
 
 ---
 
-### 2️⃣ UIBankAdminPanel (Frontend - MVC)
+## 2️⃣ UIBankAdminPanel (Frontend - MVC)
 
 Responsible for:
 
 - Razor Views
 - UI Pages
-- Calling API
-- Displaying Data
+- API integration
+- Displaying bank data
 
-**Main Structure:**
+### Main Structure
 
 ```
 Controllers/
@@ -73,42 +74,42 @@ Views/
 wwwroot/
 ```
 
-Important Controllers:
+### Important Controllers
 
 - BankAdminMVCController.cs  
 - HomeController.cs  
 
 ---
 
-## 🗄️ Database
+# 🗄️ Database
 
-- SQL Server  
-- Entity Framework Core  
-- Code First Approach  
+- SQL Server
+- Entity Framework Core
+- Code First Approach
 
-Main Tables:
+### Main Tables
 
-- Customers  
-- Accounts  
-- Transactions  
-- AdminUsers  
-
----
-
-## 🛠️ Technologies Used
-
-- ASP.NET Core Web API  
-- ASP.NET Core MVC  
-- C#  
-- Entity Framework Core  
-- SQL Server  
-- Bootstrap  
+- Customers
+- Accounts
+- Transactions
+- AdminUsers
 
 ---
 
-## ⚙️ How to Run
+# 🛠️ Technologies Used
 
-### 1️⃣ Clone Repository
+- ASP.NET Core Web API
+- ASP.NET Core MVC
+- C#
+- Entity Framework Core
+- SQL Server
+- Bootstrap
+
+---
+
+# ⚙️ How to Run
+
+## 1️⃣ Clone Repository
 
 ```
 git clone https://github.com/Amitdangebtl/BankAdminPanel.git
@@ -116,9 +117,9 @@ git clone https://github.com/Amitdangebtl/BankAdminPanel.git
 
 ---
 
-### 2️⃣ Configure Database
+## 2️⃣ Configure Database
 
-Update `appsettings.json` in API project:
+Update **appsettings.json** in API project:
 
 ```json
 "ConnectionStrings": {
@@ -128,7 +129,7 @@ Update `appsettings.json` in API project:
 
 ---
 
-### 3️⃣ Apply Migrations
+## 3️⃣ Apply Migrations
 
 ```
 dotnet ef database update
@@ -136,7 +137,7 @@ dotnet ef database update
 
 ---
 
-### 4️⃣ Run API
+## 4️⃣ Run API
 
 ```
 dotnet run --project BankAdminPanelAPI
@@ -144,7 +145,7 @@ dotnet run --project BankAdminPanelAPI
 
 ---
 
-### 5️⃣ Run MVC UI
+## 5️⃣ Run MVC UI
 
 ```
 dotnet run --project UIBankAdminPanel
@@ -152,28 +153,112 @@ dotnet run --project UIBankAdminPanel
 
 ---
 
-## 📌 Features
+# 📌 Features
 
 ✔ Manage Customers  
-✔ Manage Accounts  
-✔ View Transactions  
+✔ Manage Bank Accounts  
+✔ Deposit Money  
+✔ Withdraw Money  
+✔ Transfer Money  
+✔ View Transaction History  
 ✔ Admin Dashboard  
-✔ Clean MVC Architecture  
-✔ Separate API & UI Layer  
+✔ MVC + Web API Architecture  
 
 ---
 
-## 🎯 Key Highlights
+# 📷 Application Screenshots
 
-- Two-tier architecture (UI + API)  
-- Entity Framework Core integration  
-- Clean folder structure  
-- Beginner-friendly banking system  
-- Good practice project for CRUD operations  
+## 🔹 Login Page
+![Login](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Login.png)
 
 ---
 
-## 👨‍💻 Author
+## 🔹 Banking Admin Dashboard
+![Dashboard](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Deshboard%20Banking%20Admin%20Panel.png)
+
+---
+
+## 🔹 Bank Admin Home
+![Bank Admin Home](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Bank%20Admin%20Home.png)
+
+---
+
+## 🔹 Create Customer
+![Create Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Create%20Customer.png)
+
+---
+
+## 🔹 Customer List
+![Customer List](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Customer%20List.png)
+
+---
+
+## 🔹 Update Customer
+![Update Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Update%20Customer.png)
+
+---
+
+## 🔹 Delete Customer
+![Delete Customer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Delete%20Customer.png)
+
+---
+
+## 🔹 Create Bank Account
+![Create Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Create%20Bank%20Account.png)
+
+---
+
+## 🔹 Account List
+![Account List](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Account%20List.png)
+
+---
+
+## 🔹 Update Bank Account
+![Update Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Update%20Bank%20Account.png)
+
+---
+
+## 🔹 Delete Bank Account
+![Delete Account](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Delete%20Bank%20Account.png)
+
+---
+
+## 🔹 Deposit Money
+![Deposit](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Deposit%20Money.png)
+
+---
+
+## 🔹 Withdraw Money
+![Withdraw](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Withdraw%20Money.png)
+
+---
+
+## 🔹 Transfer Money
+![Transfer](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Transfer%20Money.png)
+
+---
+
+## 🔹 Transaction History
+![Transaction](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Transaction%20History.png)
+
+---
+
+## 🔹 Swagger API Documentation
+![Swagger](https://raw.githubusercontent.com/Amitdangebtl/BankAdminPanel/main/Swagger.png)
+
+---
+
+# 🎯 Key Highlights
+
+✔ Clean MVC + Web API architecture  
+✔ Entity Framework Core integration  
+✔ CRUD operations for banking system  
+✔ Transaction management system  
+✔ Beginner friendly banking application  
+
+---
+
+# 👨‍💻 Author
 
 **Amit Dange**  
-.NET Developer  
+.NET Developer
